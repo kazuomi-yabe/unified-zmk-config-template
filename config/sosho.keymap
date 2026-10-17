@@ -32,7 +32,6 @@
 		auto_scroll_layer: auto_scroll_layer {
 			compatible = "zmk,input-processor-temp-layer";
 			#input-processor-cells = <2>;
-			time-to-live-ms = <500>;
 		};
 	};
 
@@ -40,7 +39,9 @@
 		compatible = "zmk,input-listener";
 		device = <&trackball>;
 		
-		input-processors = <&auto_scroll_layer 4 0>; // 4番目のscrollレイヤーを有効化
+		// 第1引数: 有効化するレイヤー番号 (4: scroll)
+		// 第2引数: 有効時間 (500ms)
+		input-processors = <&auto_scroll_layer 4 500>;
 	};
 };
 
