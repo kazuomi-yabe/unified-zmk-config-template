@@ -30,12 +30,13 @@
 / {
 	auto_mouse_listener {
 		compatible = "zmk,input-listener";
-		device = <&trackball>;  // 基板側のトラックボールデバイスノード名
+		device = <&trackball>;
 		
 		processor {
 			compatible = "zmk,input-processor-temp-layer";
-			layer = <4>;             // scroll レイヤーのインデックス (0:default, 1:layer_1, 2:layer_2, 3:layer_3, 4:scroll)
-			time-to-live-ms = <500>;  // ボール操作後、マウスレイヤーを保持する時間 (ミリ秒)
+			#input-processor-cells = <0>;  // ← この必須プロパティを追加
+			layer = <4>;                  // scroll レイヤー (4番目)
+			time-to-live-ms = <500>;       // マウス移動後に有効化される時間(ms)
 		};
 	};
 };
