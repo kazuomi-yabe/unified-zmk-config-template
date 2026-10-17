@@ -33,7 +33,7 @@ keymap {
 	default_layer {
 		bindings = <
 			&kp TAB    &kp Q    &kp W  &kp E  &kp R  &kp T      &kp Y  &kp U  &kp I      &kp O    &kp P     &kp BSPC
-			&kp LCTRL  &kp A    &kp S  &kp D  &kp F  &kp G      &kp H  &mkp LCLK  &mkp RCLK  &mkp MCLK  &kp SQT   &kp ENTER
+			&kp LCTRL  &kp A    &kp S  &kp D  &kp F  &kp G      &kp H  &kp J  &kp K      &kp L    &kp SQT   &kp ENTER
 			&kp LSHFT  &kp Z    &kp X  &kp C  &kp V  &kp B      &kp N  &kp M  &kp COMMA  &kp DOT  &kp SLASH &kp LSHFT
 			&kp ESC    &kp LALT               &mo 2  &kp SPACE  &mo 1  &kp LA(GRAVE)              &mo 3     &kp LGUI
 		>;
@@ -70,8 +70,15 @@ keymap {
 			&trans &trans                &trans &trans      &trans  &out OUT_BLE                                &trans         &trans
 		>;
 	};
+
+	// マウス操作時に自動起動するレイヤーのキー設定
 	scroll {
-		status = "reserved";
+		bindings = <
+			&trans    &trans &trans &trans &trans &trans           &trans  &trans     &trans     &trans     &trans &trans
+			&trans    &trans &trans &trans &trans &trans           &trans  &mkp LCLK  &mkp RCLK  &mkp MCLK  &trans &trans
+			&trans    &trans &trans &trans &trans &trans           &trans  &trans     &trans     &trans     &trans &trans
+			&trans    &trans                &trans &trans           &trans  &trans                           &trans &trans
+		>;
 	};
 
 	extra2 {
