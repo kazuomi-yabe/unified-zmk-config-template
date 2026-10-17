@@ -26,18 +26,21 @@
 	acceleration-exponent = <0>;   // 加速なし
 };
 
-// オートマウスレイヤーの設定 (トラックボール移動検知で4番目のscrollレイヤーを自動有効化)
+// オートマウスレイヤー用のプロセッサとリスナー定義
 / {
+	input_processors {
+		zip_temp_layer: zip_temp_layer {
+			compatible = "zmk,input-processor-temp-layer";
+			#input-processor-cells = <1>;
+			time-to-live-ms = <500>;
+		};
+	};
+
 	auto_mouse_listener {
 		compatible = "zmk,input-listener";
 		device = <&trackball>;
 		
-		processor {
-			compatible = "zmk,input-processor-temp-layer";
-			#input-processor-cells = <2>;  
-			layers = <4>;                  // scroll レイヤー (4番目)
-			time-to-live-ms = <500>;       // マウス移動後に有効化される時間(ms)
-		};
+		input-processors = <&zip_temp_layer 4>; // レイヤー4 (scroll) を500ms指定で有効化
 	};
 };
 
