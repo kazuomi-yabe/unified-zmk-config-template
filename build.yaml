@@ -1,10 +1,26 @@
+---
 include:
+  # ==============================
   # R側 (Central)
+  # ==============================
+  # トラックボール版
   - board: xiao_ble/nrf52840/zmk
     shield: sosho_R_trackball rgbled_adapter
+    snippet: studio-rpc-usb-uart
+    cmake-args: -DCONFIG_ZMK_STUDIO=y
     artifact-name: sosho_R_trackball
 
+  # ==============================
   # L側 (Peripheral)
+  # ==============================
+  # トラックパッド版
   - board: xiao_ble/nrf52840/zmk
-    shield: sosho_L_trackball rgbled_adapter
-    artifact-name: sosho_L_trackball
+    shield: sosho_L_trackpad rgbled_adapter
+    artifact-name: sosho_L_trackpad
+
+  # ==============================
+  # 設定リセット用
+  # ==============================
+  - board: xiao_ble/nrf52840/zmk
+    shield: settings_reset
+    artifact-name: settings_reset
