@@ -27,6 +27,33 @@
 };
 
 /{
+	combos {
+		compatible = "zmk,combos";
+
+		// 左クリックのコンボ (J: 19, K: 20)
+		combo_LCLK {
+			timeout-ms = <50>;
+			key-positions = <19 20>;
+			bindings = <&mkp LCLK>;
+		};
+
+		// 右クリックのコンボ (K: 20, L: 21)
+		combo_RCLK {
+			timeout-ms = <50>;
+			key-positions = <20 21>;
+			bindings = <&mkp RCLK>;
+		};
+
+		// ホイールクリックのコンボ (J: 19, L: 21)
+		combo_MCLK {
+			timeout-ms = <90>;
+			key-positions = <19 21>;
+			bindings = <&mkp MCLK>;
+		};
+	};
+};
+
+/{
 keymap {
 	compatible = "zmk,keymap";
 
@@ -68,14 +95,8 @@ keymap {
 		>;
 	};
 
-	// マウスボール操作時に有効化されるレイヤー
 	scroll {
-		bindings = <
-			&trans    &trans &trans &trans &trans &trans           &trans  &trans     &trans     &trans     &trans &trans
-			&trans    &trans &trans &trans &trans &trans           &trans  &mkp LCLK  &mkp RCLK  &mkp MCLK  &trans &trans
-			&trans    &trans &trans &trans &trans &trans           &trans  &trans     &trans     &trans     &trans &trans
-			&trans    &trans                &trans &trans           &trans  &trans                           &trans &trans
-		>;
+		status = "reserved";
 	};
 
 	extra2 {
