@@ -36,8 +36,8 @@
 			#input-processor-cells = <2>;
 			type = <INPUT_EV_REL>;
 			codes = <INPUT_REL_Y>;
-			scale-multiplier = <(-1)>; // ← mul から scale-multiplier に修正
-			scale-divisor = <1>;       // ← div から scale-divisor に修正
+			multiplier = <(-1)>; // ← multiplier に修正
+			divisor = <1>;       // ← divisor に修正
 		};
 
 		auto_scroll_layer: auto_scroll_layer {
