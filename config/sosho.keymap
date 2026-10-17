@@ -30,10 +30,20 @@
 // オートマウスレイヤー用のプロセッサとリスナー定義
 / {
 	input_processors {
+		// Y軸（上下スクロール）方向を反転するスケーラープロセッサ
+		zip_scroll_invert: zip_scroll_invert {
+			compatible = "zmk,input-processor-scaler";
+			#input-processor-cells = <2>;
+			type = <INPUT_EV_REL>;
+			codes = <INPUT_REL_Y>;
+			multiplier = <(-1)>;
+			divisor = <1>;
+		};
+
+		// 自動レイヤー切り替えプロセッサ（プロパティ内に time-to-live-ms は書かない）
 		auto_scroll_layer: auto_scroll_layer {
 			compatible = "zmk,input-processor-temp-layer";
 			#input-processor-cells = <2>;
-			time-to-live-ms = <2000>; // 保持時間 2000ms (2秒)
 		};
 	};
 
@@ -41,9 +51,9 @@
 		compatible = "zmk,input-listener";
 		device = <&trackball>;
 		
-		// 1. &zip_scroll_scaler <乗算 除算>: -1倍してY軸スクロール方向を反転
-		// 2. 2秒間レイヤー4(scroll)を有効化
-		input-processors = <&zip_scroll_scaler (-1) 1>, <&auto_scroll_layer 4 0>;
+		// 1. &zip_scroll_invert 0 0 : スクロールY軸反転
+		// 2. &auto_scroll_layer 4 2000 : レイヤー4(scroll)を2000ms(2秒)間有効化
+		input-processors = <&zip_scroll_invert 0 0>, <&auto_scroll_layer 4 2000>;
 	};
 };
 
