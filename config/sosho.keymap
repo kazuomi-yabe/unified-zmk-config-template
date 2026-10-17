@@ -34,13 +34,12 @@
 		
 		processor {
 			compatible = "zmk,input-processor-temp-layer";
-			#input-processor-cells = <0>;  // ← この必須プロパティを追加
+			#input-processor-cells = <2>;  
 			layer = <4>;                  // scroll レイヤー (4番目)
 			time-to-live-ms = <500>;       // マウス移動後に有効化される時間(ms)
 		};
 	};
 };
-
 
 /{
 keymap {
