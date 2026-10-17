@@ -30,7 +30,6 @@
 // オートマウスレイヤー用のプロセッサとリスナー定義
 / {
 	input_processors {
-		// スクロールレイヤー(Layer 4)有効化用プロセッサ
 		auto_scroll_layer: auto_scroll_layer {
 			compatible = "zmk,input-processor-temp-layer";
 			#input-processor-cells = <2>;
@@ -41,11 +40,10 @@
 		compatible = "zmk,input-listener";
 		device = <&trackball>;
 		
-		// トラックボール移動で直接レイヤー4(scroll)を2秒(2000ms)間有効化
-		input-processors = <&auto_scroll_layer 4 2000>;
+		// 保持時間を 2000ms から 500ms に変更（復帰の遅れを解消）
+		input-processors = <&auto_scroll_layer 4 500>;
 	};
 };
-
 /{
 keymap {
 	compatible = "zmk,keymap";
