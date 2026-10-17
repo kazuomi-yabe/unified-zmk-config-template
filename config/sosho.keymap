@@ -26,6 +26,16 @@
 	acceleration-exponent = <0>;   // 加速なし
 };
 
+// トラックボール操作時に自動的に scroll レイヤー(インデックス: 4) を有効化する設定
+&trackball {
+	status = "okay";
+	zippy {
+		compatible = "zmk,input-processor-temp-layer";
+		layer = <4>;       // scroll レイヤーのインデックス（0:default, 1:layer1, 2:layer2, 3:layer3, 4:scroll）
+		time-to-live-ms = <400>; // ボール停止後、レイヤーを維持する時間（ミリ秒）
+	};
+};
+
 /{
 keymap {
 	compatible = "zmk,keymap";
@@ -37,7 +47,6 @@ keymap {
 			&kp LSHFT  &kp Z    &kp X  &kp C  &kp V  &kp B      &kp N  &kp M  &kp COMMA  &kp DOT  &kp SLASH &kp LSHFT
 			&kp ESC    &kp LALT               &mo 2  &kp SPACE  &mo 1  &kp LA(GRAVE)              &mo 3     &kp LGUI
 		>;
-		//&ec_ms_lとrは、上のビヘイビアで作ったもの。
 		sensor-bindings = <&ec_ms_l SCRL_LEFT SCRL_RIGHT &ec_ms_r SCRL_DOWN SCRL_UP>;
 	};
 	
@@ -57,9 +66,7 @@ keymap {
 			&trans &kp F11 &kp F12 &kp F13 &kp F14 &kp F15    &trans  &kp SEMI  &kp SQT   &trans    &kp QMARK  &kp BSLH
 			&trans &trans                  &trans  &trans     &trans  &trans                        &trans     &trans
 		>;
-		//レイヤー2のときだけ、左手のエンコーダを回すとボリュームの上下ができるようになっています。
 		sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP &ec_ms_r SCRL_DOWN SCRL_UP>;
-
 	};
 
 	layer_3 {
@@ -71,7 +78,7 @@ keymap {
 		>;
 	};
 
-	// マウス操作時に自動起動するレイヤーのキー設定
+	// ボール操作後のみ有効になるレイヤー（インデックス 4）
 	scroll {
 		bindings = <
 			&trans    &trans &trans &trans &trans &trans           &trans  &trans     &trans     &trans     &trans &trans
