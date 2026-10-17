@@ -31,7 +31,7 @@
 	input_processors {
 		auto_scroll_layer: auto_scroll_layer {
 			compatible = "zmk,input-processor-temp-layer";
-			#input-processor-cells = <1>;
+			#input-processor-cells = <2>;
 			time-to-live-ms = <500>;
 		};
 	};
@@ -40,7 +40,7 @@
 		compatible = "zmk,input-listener";
 		device = <&trackball>;
 		
-		input-processors = <&auto_scroll_layer 4>; // 4番目のscrollレイヤーを有効化
+		input-processors = <&auto_scroll_layer 4 0>; // 4番目のscrollレイヤーを有効化
 	};
 };
 
