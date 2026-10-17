@@ -26,17 +26,6 @@
 	acceleration-exponent = <0>;   // 加速なし
 };
 
-// マウスボール操作時に自動で scroll レイヤー（レイヤー4）へ切り替えるプロセッサ
-/ {
-	input_processors {
-		zip_temp_layer: zip_temp_layer {
-			compatible = "zmk,input-processor-temp-layer";
-			layer = <4>;             // scroll レイヤーのインデックス (0:default, 1:layer_1, 2:layer_2, 3:layer_3, 4:scroll)
-			time-to-live-ms = <1000>; // ボールを動かしてからマウスレイヤーを維持する時間（ミリ秒）
-		};
-	};
-};
-
 /{
 keymap {
 	compatible = "zmk,keymap";
@@ -79,7 +68,7 @@ keymap {
 		>;
 	};
 
-	// ボール操作時のみ自動有効化されるレイヤー（インデックス 4）
+	// マウスボール操作時に有効化されるレイヤー
 	scroll {
 		bindings = <
 			&trans    &trans &trans &trans &trans &trans           &trans  &trans     &trans     &trans     &trans &trans
