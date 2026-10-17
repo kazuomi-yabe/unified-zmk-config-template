@@ -6,6 +6,7 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/pointing.h>
 #include <dt-bindings/zmk/outputs.h>
+#include <dt-bindings/zmk/input_transform.h>
 
 / {
 	behaviors {
@@ -29,20 +30,9 @@
 // オートマウスレイヤー用のプロセッサとリスナー定義
 / {
 	input_processors {
-		// スクロール方向反転用プロセッサ (Y軸を -1/1 倍して反転)
-		zip_scroll_invert: zip_scroll_invert {
-			compatible = "zmk,input-processor-scaler";
-			#input-processor-cells = <2>;
-			type = <INPUT_EV_REL>;
-			code = <INPUT_REL_Y>;
-			mul = <(-1)>; // Y軸方向を反転
-			div = <1>;
-		};
-
 		auto_scroll_layer: auto_scroll_layer {
 			compatible = "zmk,input-processor-temp-layer";
 			#input-processor-cells = <2>;
-			time-to-live-ms = <2000>;
 		};
 	};
 
@@ -50,8 +40,9 @@
 		compatible = "zmk,input-listener";
 		device = <&trackball>;
 		
-		// プロセッサを順番に適用 (スクロール反転 → レイヤー4有効化)
-		input-processors = <&zip_scroll_invert 0 0>, <&auto_scroll_layer 4 0>;
+		// 1. スクロールのY軸（上下方向）を反転
+		// 2. トラックボール操作でレイヤー4を有効化 (保持時間: 2000ms = 2秒)
+		input-processors = <&zip_scroll_transform INPUT_TRANSFORM_Y_INVERT>, <&auto_scroll_layer 4 2000>;
 	};
 };
 
