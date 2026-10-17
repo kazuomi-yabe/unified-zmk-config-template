@@ -30,14 +30,14 @@
 // オートマウスレイヤー用のプロセッサとリスナー定義
 / {
 	input_processors {
-		// Y軸（上下スクロール）方向を反転するプロセッサ
+		// Y軸（上下スクロール）方向を反転するスケーラー
 		zip_scroll_invert: zip_scroll_invert {
 			compatible = "zmk,input-processor-scaler";
 			#input-processor-cells = <2>;
 			type = <INPUT_EV_REL>;
-			codes = <INPUT_REL_Y>; // ← 必須プロパティ(Y軸指定)
-			mul = <(-1)>;          // -1倍して上下反転
-			div = <1>;
+			codes = <INPUT_REL_Y>;
+			scale-multiplier = <(-1)>; // ← mul から scale-multiplier に修正
+			scale-divisor = <1>;       // ← div から scale-divisor に修正
 		};
 
 		auto_scroll_layer: auto_scroll_layer {
