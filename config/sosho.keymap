@@ -30,24 +30,24 @@
 	combos {
 		compatible = "zmk,combos";
 
-		// 左クリックのコンボ (J: 19, K: 20)
+		// Jキー (19) の単押しコンボでマウス左クリック
 		combo_LCLK {
 			timeout-ms = <50>;
-			key-positions = <19 20>;
+			key-positions = <19>;
 			bindings = <&mkp LCLK>;
 		};
 
-		// 右クリックのコンボ (K: 20, L: 21)
+		// Kキー (20) の単押しコンボでマウス右クリック
 		combo_RCLK {
 			timeout-ms = <50>;
-			key-positions = <20 21>;
+			key-positions = <20>;
 			bindings = <&mkp RCLK>;
 		};
 
-		// ホイールクリックのコンボ (J: 19, L: 21)
+		// Lキー (21) の単押しコンボでマウスホイールクリック
 		combo_MCLK {
-			timeout-ms = <90>;
-			key-positions = <19 21>;
+			timeout-ms = <50>;
+			key-positions = <21>;
 			bindings = <&mkp MCLK>;
 		};
 	};
@@ -64,6 +64,7 @@ keymap {
 			&kp LSHFT  &kp Z    &kp X  &kp C  &kp V  &kp B      &kp N  &kp M  &kp COMMA  &kp DOT  &kp SLASH &kp LSHFT
 			&kp ESC    &kp LALT               &mo 2  &kp SPACE  &mo 1  &kp LA(GRAVE)              &mo 3     &kp LGUI
 		>;
+		//&ec_ms_lとrは、上のビヘイビアで作ったもの。
 		sensor-bindings = <&ec_ms_l SCRL_LEFT SCRL_RIGHT &ec_ms_r SCRL_DOWN SCRL_UP>;
 	};
 	
@@ -83,7 +84,9 @@ keymap {
 			&trans &kp F11 &kp F12 &kp F13 &kp F14 &kp F15    &trans  &kp SEMI  &kp SQT   &trans    &kp QMARK  &kp BSLH
 			&trans &trans                  &trans  &trans     &trans  &trans                        &trans     &trans
 		>;
+		//レイヤー2のときだけ、左手のエンコーダを回すとボリュームの上下ができるようになっています。
 		sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP &ec_ms_r SCRL_DOWN SCRL_UP>;
+
 	};
 
 	layer_3 {
@@ -94,7 +97,6 @@ keymap {
 			&trans &trans                &trans &trans      &trans  &out OUT_BLE                                &trans         &trans
 		>;
 	};
-
 	scroll {
 		status = "reserved";
 	};
